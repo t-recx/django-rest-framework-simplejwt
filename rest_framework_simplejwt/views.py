@@ -87,7 +87,7 @@ class TokenCookieViewMixin:
             response.set_cookie(
                 '{}_refresh'.format(api_settings.AUTH_COOKIE), data['refresh'],
                 expires=expires,
-                domain=None,
+                domain=api_settings.AUTH_COOKIE_DOMAIN,
                 path=reverse(self.token_refresh_view_name),
                 secure=api_settings.AUTH_COOKIE_SECURE or None,
                 httponly=True,
@@ -209,7 +209,7 @@ class TokenCookieDeleteView(APIView):
         )
         response.delete_cookie(
             '{}_refresh'.format(api_settings.AUTH_COOKIE),
-            domain=None,
+            domain=api_settings.AUTH_COOKIE_DOMAIN,
             path=reverse(self.token_refresh_view_name),
         )
 
